@@ -22,8 +22,8 @@ public class Programm {
     }
 
     static void ShowInfoDefaultFormat(ExampleImmutable target, int index){
-        System.out.printf("ExampleImmutable - %d", index);
-        System.out.printf("Contained class value is %d", target.containedClass.getNumber());
+        System.out.printf("ExampleImmutable - %d\n", index);
+        System.out.printf("Contained class value is %d\n", target.containedClass.getNumber());
     }
 
     static void ShowInfoOverrideFormat(ExampleImmutable target){
