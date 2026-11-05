@@ -10,23 +10,23 @@ public class Programm {
         exampleImmutable3.containedClass.setNumber(888);
 
         System.out.println("\nUse sout format from main.");
-        ShowInfoDefaultFormat(exampleImmutable1, 1);
-        ShowInfoDefaultFormat(exampleImmutable2, 2);
-        ShowInfoDefaultFormat(exampleImmutable3, 3);
+        showInfoDefaultFormat(exampleImmutable1, 1);
+        showInfoDefaultFormat(exampleImmutable2, 2);
+        showInfoDefaultFormat(exampleImmutable3, 3);
 
         System.out.println("\nUse sout format from Override toString");
-        ShowInfoOverrideFormat(exampleImmutable1);
-        ShowInfoOverrideFormat(exampleImmutable2);
-        ShowInfoOverrideFormat(exampleImmutable3);
+        showInfoOverrideFormat(exampleImmutable1);
+        showInfoOverrideFormat(exampleImmutable2);
+        showInfoOverrideFormat(exampleImmutable3);
 
     }
 
-    static void ShowInfoDefaultFormat(ExampleImmutable target, int index){
+    static void showInfoDefaultFormat(ExampleImmutable target, int index){
         System.out.printf("ExampleImmutable - %d\n", index);
         System.out.printf("Contained class value is %d\n", target.containedClass.getNumber());
     }
 
-    static void ShowInfoOverrideFormat(ExampleImmutable target){
+    static void showInfoOverrideFormat(ExampleImmutable target){
         System.out.println(target.toString());
     }
 }
