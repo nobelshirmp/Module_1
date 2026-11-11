@@ -1,32 +1,33 @@
 public class Programm {
+
     public static void main(String[] args) {
-        ExampleImmutable exampleImmutable1 = new ExampleImmutable();
-        ExampleImmutable exampleImmutable2 = new ExampleImmutable(123);
-        ExampleImmutable exampleImmutable3 = new ExampleImmutable(new ExampleImmutable.ContainedClass());
+        ExampleImmutable exampleImmutable = new ExampleImmutable();
+        exampleImmutable.add(123, "test - 1");
+        exampleImmutable.add(777, "test - 2");
+        exampleImmutable.add(new ExampleImmutable.ContainedClass(123, "test - 3"));
+        exampleImmutable.add(new ExampleImmutable.ContainedClass(123, "error"));
+        exampleImmutable.add(444, "error");
 
-        exampleImmutable1.containedClass.setNumber(555);
-        var result = exampleImmutable1.containedClass.getNumber() + exampleImmutable2.containedClass.getNumber();
-        exampleImmutable2.containedClass.setNumber(result);
-        exampleImmutable3.containedClass.setNumber(888);
+        System.out.println(exampleImmutable.toString());
 
-        System.out.println("\nUse sout format from main.");
-        showInfoDefaultFormat(exampleImmutable1, 1);
-        showInfoDefaultFormat(exampleImmutable2, 2);
-        showInfoDefaultFormat(exampleImmutable3, 3);
+        System.out.println("\nTest find all object with number - 123");
 
-        System.out.println("\nUse sout format from Override toString");
-        showInfoOverrideFormat(exampleImmutable1);
-        showInfoOverrideFormat(exampleImmutable2);
-        showInfoOverrideFormat(exampleImmutable3);
+        for (var item : exampleImmutable.findContainers(x -> x.getNumber() == 123)){
+            System.out.println(item.toString());
+        }
 
-    }
+        System.out.println("\nTest find all object with tag - error");
 
-    static void showInfoDefaultFormat(ExampleImmutable target, int index){
-        System.out.printf("ExampleImmutable - %d\n", index);
-        System.out.printf("Contained class value is %d\n", target.containedClass.getNumber());
-    }
+        for (var item : exampleImmutable.findContainers(x -> x.getTag().equals("error"))){
+            System.out.println(item.toString());
+        }
 
-    static void showInfoOverrideFormat(ExampleImmutable target){
-        System.out.println(target.toString());
+        System.out.println("\nTest find first object with number - 123");
+
+        System.out.println(exampleImmutable.findContainer(x -> x.getNumber() == 123));
+
+        System.out.println("\nTest error number - 999");
+
+        System.out.println(exampleImmutable.findContainer(x -> x.getNumber() == 999));
     }
 }
