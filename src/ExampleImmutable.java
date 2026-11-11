@@ -1,3 +1,4 @@
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,9 +8,11 @@ import java.util.function.Predicate;
 public final class ExampleImmutable {
 
     private final LinkedList<ContainedClass> containers;
+    private final LocalDateTime createTime;
 
     public ExampleImmutable() {
         containers = new LinkedList<>();
+        createTime =  LocalDateTime.now();
     }
 
     public void add(final ContainedClass container){ containers.add(container); }
@@ -35,15 +38,15 @@ public final class ExampleImmutable {
 
     public ContainedClass findContainer(Predicate<ContainedClass> predicate){
 
-        ContainedClass result = ContainedClass.Empty();
+        ContainedClass result = ContainedClass.empty();
 
         if (predicate != null){
-                for(ContainedClass item : containers){
-                    if(predicate.test(item)){
-                        result = item;
-                        break;
-                    }
+            for(ContainedClass item : containers){
+                if(predicate.test(item)){
+                    result = item;
+                    break;
                 }
+            }
         }
 
         return result;
@@ -58,6 +61,8 @@ public final class ExampleImmutable {
         for (ContainedClass item : containers){
             builder.append(String.format("\n%s", item.toString()));
         }
+
+        builder.append(String.format("\nCreate time - %s", createTime.toString()));
 
         return builder.toString();
     }
@@ -80,7 +85,7 @@ public final class ExampleImmutable {
             return  String.format("I *%s* contain value %d and tag %s", super.toString(), number, tag);
         }
 
-        public static ContainedClass Empty(){
+        public static ContainedClass empty(){
             return new ContainedClass(Integer.MIN_VALUE, "Empty");
         }
     }
